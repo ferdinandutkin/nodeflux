@@ -1,0 +1,9 @@
+.input-port {
+    border: 3px black solid;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    margin-right: auto;
+    transform: translateX(-50%);
+}

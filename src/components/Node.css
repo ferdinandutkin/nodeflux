@@ -1,0 +1,8 @@
+.node {
+    border-width: 2px;
+    border-color: black;
+    border-style: solid;
+    position: absolute;
+    border-radius: 5px;
+    background: yellow;
+}
