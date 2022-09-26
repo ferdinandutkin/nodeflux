@@ -1,14 +1,15 @@
 import {INodeFactory} from "./INodeFactory";
 import {NodeInfo} from "./NodeInfo";
-import {INodeInfo} from "./INode";
+import {INodeInfo} from "./nodes/INode";
 import {v4} from 'uuid';
+import {InputPort, OutputPort} from "./IOPort";
 
 export class StartNodeFactory implements INodeFactory {
     constructor() {
         this.preview = this.createInstance()
     }
     createInstance(): NodeInfo {
-        return new NodeInfo({type : "start", id : v4(), inputs : [], outputs : [null]})
+        return new NodeInfo({type : "start", id : v4(), inputs : [new InputPort()], outputs : [new OutputPort()]})
     }
     preview: INodeInfo;
 }
@@ -18,7 +19,7 @@ export class EndNodeFactory implements INodeFactory {
         this.preview = this.createInstance()
     }
     createInstance(): NodeInfo {
-        return new NodeInfo({type : "end", id : v4(), inputs : [null], outputs : []})
+        return new NodeInfo({type : "end", id : v4(), inputs : [new InputPort()], outputs : [new OutputPort()]})
     }
     preview: INodeInfo;
 }
@@ -28,7 +29,18 @@ export class DefaultNodeFactory implements INodeFactory {
         this.preview = this.createInstance()
     }
     createInstance(): NodeInfo {
-        return new NodeInfo({type : "default", id : v4(), inputs : [null], outputs : [null]})
+        return new NodeInfo({type : "default", id : v4(), inputs : [new InputPort()], outputs : [new OutputPort()]})
+    }
+    preview: INodeInfo;
+}
+
+
+export class TwoButtonsNodeFactory implements INodeFactory {
+    constructor() {
+        this.preview = this.createInstance()
+    }
+    createInstance(): NodeInfo {
+        return new NodeInfo({type : "twoButtons", id : v4(), inputs : [new InputPort()], outputs : [new OutputPort()]})
     }
     preview: INodeInfo;
 }

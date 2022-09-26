@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {INodeInfo, Position} from "../models/INode";
+import {INodeInfo, Position} from "../models/nodes/INode";
 import {DndContext} from '../state/DndContext';
 
 
@@ -26,12 +26,9 @@ export const DndProvider = ({children}: {children : React.ReactNode}) => {
         setDragged(undefined)
     }
 
-
     const isDragging = dragged !== undefined
 
-
     const isDraggingOverDropZone = isDragging && isOverDropZone;
-
 
     const dndDefaultValue = {drag, drop, dragLeave, relativePosition, dragged, isOverDropZone, isDragging, isDraggingOverDropZone, setIsOverDropZone }
 

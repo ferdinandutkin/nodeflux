@@ -1,19 +1,35 @@
-import {connectedNodeIdentifier, identifier, INodeInfo, Vector} from "./INode";
 import * as _ from "lodash";
+import {IConnection} from "./nodes/IConnection";
+import {Identifier, INodeInfo} from "./nodes/INode";
+import {Vector} from "./nodes/Vector";
 
 
-export function buildTree(nodes : INodeInfo[], rootId : identifier) {
-    const margin : Vector = {X : 50, Y : 50}
-    const knownNodes = new Set<identifier>()
+export function buildTree(nodes : INodeInfo[], connections : IConnection[], rootId : Identifier) {
+
+
+    const margin : Vector = {x : 50, y : 50}
+    const knownNodes = new Set<Identifier>()
 
     const nodesByLevel = new Map<number, INodeInfo[]>()
 
-    function getNodeById(id : identifier) {
+
+    function getOutputs(id : Identifier) {
+        const node = getNodeById(id)
+
+
+
+        return  node!.outputs
+            .map(output => output.id)
+            .flatMap(outputPortId => connections.filter(connection => connection.from === outputPortId))
+            .map(connection => connection.to)
+            .flatMap(to => nodes.filter(node => node.inputs.some(input => input.id === to)).map(node => node.id));
+    }
+    function getNodeById(id : Identifier) {
         return nodes.find(node => node.id === id)
     }
 
-    function assignLevels(currentNodeId : connectedNodeIdentifier, currentLevel= 0) {
-        if (currentNodeId === null) {
+    function assignLevels(currentNodeId : Identifier | undefined, currentLevel= 0) {
+        if (currentNodeId === undefined) {
             return
         }
 
@@ -29,12 +45,8 @@ export function buildTree(nodes : INodeInfo[], rootId : identifier) {
             return
         }
 
-        for (const outputId of currentNode.outputs) {
+        for (const outputId of getOutputs(currentNode.id)) {
             assignLevels(outputId, currentLevel  + 1)
-        }
-
-        for (const inputId of currentNode.inputs) {
-            assignLevels(inputId, currentLevel  + 1)
         }
 
         const nodesOfCurrentLevel = nodesByLevel.get(currentLevel)
@@ -47,7 +59,7 @@ export function buildTree(nodes : INodeInfo[], rootId : identifier) {
     }
 
     function calculatePositions() {
-        const heightKeyValuePairs = Array.from(nodesByLevel).map(([level, nodes]) => [level, _.sumBy(nodes, node => node.dimensions.Y) + (nodes.length + 1) * margin.Y] as readonly [number, number]);
+        const heightKeyValuePairs = Array.from(nodesByLevel).map(([level, nodes]) => [level, _.sumBy(nodes, node => node.dimensions.y) + (nodes.length + 1) * margin.y] as readonly [number, number]);
 
         const heightDictionary = new Map<number, number>(heightKeyValuePairs)
 
@@ -55,23 +67,23 @@ export function buildTree(nodes : INodeInfo[], rootId : identifier) {
 
         const nodesKeyValuePairs = Array.from(nodesByLevel)
 
-        let currentX = margin.X
+        let currentX = margin.x
 
 
         _.sortBy(nodesKeyValuePairs, kvp => kvp[0]).forEach(([level, nodes]) => {
             const levelHeight = heightDictionary.get(level)!
 
-            const maxWidthInLevel = _.maxBy(nodes, node => node.dimensions.X)!.dimensions.X;
+            const maxWidthInLevel = _.maxBy(nodes, node => node.dimensions.x)!.dimensions.x;
 
             let currentY = (maxHeight - levelHeight) / 2;
 
             nodes.forEach(node => {
-                node.position.Y = currentY
-                node.position.X = currentX
-                currentY += node.dimensions.Y + margin.Y
+                node.position.y = currentY
+                node.position.x = currentX
+                currentY += node.dimensions.y + margin.y
 
             })
-            currentX += maxWidthInLevel + margin.X
+            currentX += maxWidthInLevel + margin.x
 
         });
 

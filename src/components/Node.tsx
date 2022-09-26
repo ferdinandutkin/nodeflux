@@ -1,10 +1,11 @@
-import {INodeInfo, NodeType, Position} from "../models/INode";
+import {INodeInfo, Position} from "../models/nodes/INode";
 import './Node.css'
 import {Input} from "./Input";
 import {Output} from "./Output";
 import Draggable from "react-draggable";
-import React from "react";
+import React, {ReactNode} from "react";
 import {useXarrow} from "react-xarrows";
+import {NodeType} from "../models/nodes/NodeType";
 
 export type DragType = "none" | "ghost" | "material"
 export type NodeProps = {node : INodeInfo, dragType : DragType | undefined}
@@ -19,17 +20,18 @@ const Node = (props: NodeProps) => {
     let nodeColors : TypeColorDict = {
         "start" : "red",
         "default" : "yellow",
-        "end" : "blue"
+        "end" : "blue",
+        "twoButtons" : "purple"
     }
     let styles : React.CSSProperties = {
-        width: `${node.dimensions.X}px`,
-        height: `${node.dimensions.Y}px`,
+        width: `${node.dimensions.x}px`,
+        height: `${node.dimensions.y}px`,
         backgroundColor: nodeColors[node.type]
     }
 
     if (dragType === "material") {
-        const {X, Y} = node.position
-        styles["transform"] = `translateX(${X}px) translateY(${Y}px)`
+        const {x, y} = node.position
+        styles["transform"] = `translateX(${x}px) translateY(${y}px)`
     }
 
 
@@ -41,12 +43,14 @@ const Node = (props: NodeProps) => {
                     <div className="row">
                         <div className="col">
                             {
-                                node.inputs.map((id, idx) => <Input key={idx} index={idx} from={id} to={node.id}/>)
+                               node.inputs.map(input =>
+                                    <Input key={input.id} {...input}/>)
                             }
                         </div>
                         <div className="col">
                             {
-                                node.outputs.map((id, idx)  => <Output key={idx} index={idx} from={node.id} to={id}/>)
+                                node.outputs.map(output =>
+                                    <Output key={output.id} {...output}/>)
                             }
                         </div>
                     </div>
@@ -59,21 +63,21 @@ const Node = (props: NodeProps) => {
 }
 
 
-const WrapConditionally = ({dragType, children, position} : {dragType : DragType, children : JSX.Element, position : Position}) => {
-    if (dragType === "material") {
+const WrapConditionally = ({dragType, children, position} : {dragType : DragType, children : ReactNode, position : Position}) : JSX.Element =>
+    (dragType === "material") ?
+        <WrapperComponent position={position}>{children}</WrapperComponent> : children as JSX.Element;
 
-        return  <WrapperComponent position={position}>{children}</WrapperComponent>
-    }
-    return children
-}
 
-const WrapperComponent = ({children, position} : { children : JSX.Element, position : Position}) => {
+
+const WrapperComponent = ({children, position} : { children : ReactNode, position : Position}) => {
     const updateXarrow = useXarrow();
 
-    return (<Draggable defaultPosition={{x : position.X, y : position.Y}}  onDrag={updateXarrow} onStop={updateXarrow}>
+    return (<Draggable defaultPosition={{x : position.x, y : position.y}} onDrag={updateXarrow} onStop={updateXarrow}>
                 {children}
             </Draggable>)
 }
+
+
 
 
 

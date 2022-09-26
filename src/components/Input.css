@@ -1,9 +1,19 @@
 .input-port {
-    border: 3px black solid;
+    border-width: 3px;
     border-radius: 50%;
     width: 20px;
     height: 20px;
-    background-color: white;
     margin-right: auto;
     transform: translateX(-50%);
+}
+
+.input-port.rejected {
+    background-color: red;
+    border: dashed;
+}
+
+.input-port.default {
+    background-color: white;
+    border: solid black;
+
 }

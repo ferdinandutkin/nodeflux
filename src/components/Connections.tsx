@@ -1,16 +1,16 @@
-import {useAppSelector} from "../state/store";
+import {useConnections} from "../state/store";
 import {Connection} from "./Connection";
 
-type ConnectionInfo = {
 
-}
+
 const Connections = () => {
-    const outputs = useAppSelector(state=>state.nodes.nodes.flatMap(from => from.outputs.map(to => ({from : from.id, to}))));
+    const connections = useConnections(c => c);
+
     return (
         <>
             {
-                outputs.map(({from, to}) =>
-                    <Connection key={from+to} from={from} to={to}/>
+                connections.map(connection =>
+                    <Connection {...connection}/>
                 )
             }
         </>

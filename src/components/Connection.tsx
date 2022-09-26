@@ -1,50 +1,45 @@
 import Xarrow from "react-xarrows";
-import {connectedNodeIdentifier, identifier} from "../models/INode";
-import React, {useState} from "react";
+import React, {MouseEventHandler, useState} from "react";
 import {xarrowPropsType} from "react-xarrows/lib/types";
+import {generateInputId, generateOutputId} from "../helpers/generateId";
 import {useAppDispatch} from "../state/store";
+import {disconnect} from "../state/reducers/connectionsReducer";
+import {IConnection} from "../models/nodes/IConnection";
 
-export type ConnectionProps = {from : identifier, to : connectedNodeIdentifier}
-export const Connection = ({from, to} : ConnectionProps) => {
+
+export const Connection = ({from, to, id} : IConnection) => {
 
     const [isHovered, setIsHovered] = useState(false)
 
     const dispatch = useAppDispatch()
 
-    if (to === null) {
-        return null
-    }
-
-
     const arrowProps : xarrowPropsType = {
         startAnchor : "right",
         endAnchor: "left",
-        start: `output-${from}-${to}`,
-        end:`input-${from}-${to}`,
+        start: generateOutputId(from),
+        end: generateInputId(to),
         color : isHovered ? "red" : "black",
         dashness : isHovered ? {strokeLen : 2, nonStrokeLen : 2} : false
     }
-    const onMouseEnter : React.MouseEventHandler<HTMLDivElement> = (e) => {
+
+    const onMouseEnter : MouseEventHandler<HTMLDivElement> = () => {
         setIsHovered(true)
     }
 
-    const onMouseLeave : React.MouseEventHandler<HTMLDivElement> = (e) => {
+    const onMouseLeave : MouseEventHandler<HTMLDivElement> = () => {
         setIsHovered(false)
     }
 
-    const onDoubleClick : React.MouseEventHandler<HTMLDivElement> = (e) => {
-
+    const onDoubleClick : MouseEventHandler<HTMLDivElement> = () => {
+        dispatch(disconnect(id))
     }
 
-
-
     return (
-        <div onMouseEnter={onMouseEnter} onDoubleClick={onDoubleClick} onMouseLeave={onMouseLeave}>
-            <Xarrow
-                {...arrowProps}
-            />
-        </div>
-
+            <div onMouseEnter={onMouseEnter} onDoubleClick={onDoubleClick} onMouseLeave={onMouseLeave}>
+                <Xarrow
+                    {...arrowProps}
+                />
+            </div>
     )
 
 }

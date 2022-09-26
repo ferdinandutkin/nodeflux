@@ -1,14 +1,14 @@
-import { identifier} from "../models/INode";
+import { Identifier} from "../models/nodes/INode";
 import {createContext, useContext} from "react";
 
-export type PendingConnectionInfo = {id : identifier, index : number} | undefined
+
 export type PendingConnectionContextState = {
-    from : PendingConnectionInfo
-    to : PendingConnectionInfo
+    from? : Identifier
+    to? : Identifier
     isActive : boolean
     reset : () => void
-    setTo : (to : PendingConnectionInfo) => void
-    setFrom : (from : PendingConnectionInfo) => void
+    setTo : (to : Identifier) => void
+    setFrom : (from : Identifier) => void
 }
 
 export const PendingConnectionContext = createContext<PendingConnectionContextState | undefined>(undefined);

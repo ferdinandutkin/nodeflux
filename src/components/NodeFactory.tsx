@@ -17,7 +17,7 @@ export const NodeFactory = ({factory} : NodeFactoryProps) => {
     }
 
     const onMouseDown: MouseEventHandler<HTMLDivElement> = (e) => {
-        const relativePosition = {X : e.clientX - factoryRef.current!.offsetLeft, Y : e.clientY - factoryRef.current!.offsetTop}
+        const relativePosition = {x: e.clientX - factoryRef.current!.offsetLeft, y: e.clientY - factoryRef.current!.offsetTop}
         drag({dragged: factory.createInstance(), relativePosition : relativePosition})
     }
 

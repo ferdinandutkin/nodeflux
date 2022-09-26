@@ -1,18 +1,20 @@
-import React from 'react';
-import {OutputProps} from "./TransputProps";
+import React, {MouseEventHandler} from 'react';
 import "./Output.css"
 import {usePendingConnectionContext} from "../state/PendingConnectionContext";
+import {generateOutputId} from "../helpers/generateId";
+import {OutputPort} from "../models/nodes/INode";
 
-export const Output = ({from, to, index} : OutputProps) => {
+export const Output = ({id} : OutputPort) => {
     const setFrom = usePendingConnectionContext()?.setFrom
-    const onMouseDown : React.MouseEventHandler<HTMLDivElement> = (e) => {
+
+    const onMouseDown : MouseEventHandler<HTMLDivElement> = e => {
         e.stopPropagation()
         e.preventDefault()
-        if (to == null) {
-            setFrom?.({id : from, index})
-        }
+
+        setFrom?.(id)
+
     }
 
-    return <div id={`output-${from}-${to}`} onMouseDown={onMouseDown} className="output-port"/>
+    return <div id={generateOutputId(id!)} className="output-port" onMouseDown={onMouseDown}/>
 
 }
