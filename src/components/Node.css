@@ -6,3 +6,7 @@
     border-radius: 5px;
     background: yellow;
 }
+
+.io-port + .io-port  {
+  margin-top: 25px;
+}

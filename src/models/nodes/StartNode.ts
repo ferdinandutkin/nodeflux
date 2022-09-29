@@ -1,11 +1,15 @@
 import {Node} from './Node'
+import {IStartNode} from "./typings/IStartNode";
 
+export class StartNode extends Node implements IStartNode {
 
-export class StartNode extends Node {
     constructor() {
-        super("start", undefined, [{id : "start-output"}])
+        super("start", undefined, [{id : "start"}]);
         this.id = "start"
     }
+
+    type : "start" = "start"
+    data!: never;
 }
 
 

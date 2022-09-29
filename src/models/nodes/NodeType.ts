@@ -1,1 +1,1 @@
-export type NodeType = "start" | "end" | "default" | "twoButtons"
+export type NodeType = "start" | "end" | "default" | "buttons"

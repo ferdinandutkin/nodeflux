@@ -1,5 +1,5 @@
 import {useAppSelector} from "../state/store";
-import Node from './Node'
+import {Node} from './Node'
 
 const Nodes = () => {
 

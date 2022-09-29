@@ -1,4 +1,4 @@
-import {INodeInfo, Position} from "../models/nodes/INode";
+import {INodeInfo, Position} from "../models/nodes/typings/INode";
 import {createContext, useContext} from "react";
 
 export type DndContextState = {

@@ -4,7 +4,7 @@ import {usePendingConnectionContext} from "../state/PendingConnectionContext";
 import {useNodes} from "../state/store";
 import {canConnect} from "../models/nodeTypesInfo";
 import {generateInputId} from "../helpers/generateId";
-import {InputPort} from "../models/nodes/INode";
+import {InputPort} from "../models/nodes/typings/INode";
 type InputState = "default" | "rejected"
 
 export const Input = ({ id, label} : InputPort) => {
@@ -36,6 +36,6 @@ export const Input = ({ id, label} : InputPort) => {
     const onMouseLeave : MouseEventHandler<HTMLDivElement> = () => {
         setState("default")
     }
-    return <div id={generateInputId(id)} className={`input-port ${state}`} onMouseDown={onMouseDown} onMouseLeave={onMouseLeave}/>
+    return <div id={generateInputId(id)} className={`in-port input-port ${state}`} onMouseDown={onMouseDown} onMouseLeave={onMouseLeave}/>
 
 }

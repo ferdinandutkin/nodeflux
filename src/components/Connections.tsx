@@ -10,7 +10,7 @@ const Connections = () => {
         <>
             {
                 connections.map(connection =>
-                    <Connection {...connection}/>
+                    <Connection key={connection.id} {...connection}/>
                 )
             }
         </>

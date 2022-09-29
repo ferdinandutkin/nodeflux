@@ -1,4 +1,4 @@
-import {Identifier, INode, OutputPort, InputPort} from "./INode";
+import {Identifier, INode, OutputPort, InputPort} from "./typings/INode";
 import {v4} from "uuid";
 import {NodeType} from "./NodeType";
 

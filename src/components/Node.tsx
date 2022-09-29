@@ -1,4 +1,4 @@
-import {INodeInfo, Position} from "../models/nodes/INode";
+import {INodeInfo, Position} from "../models/nodes/typings/INode";
 import './Node.css'
 import {Input} from "./Input";
 import {Output} from "./Output";
@@ -6,6 +6,9 @@ import Draggable from "react-draggable";
 import React, {ReactNode} from "react";
 import {useXarrow} from "react-xarrows";
 import {NodeType} from "../models/nodes/NodeType";
+import {NodeBody} from "./body/NodeBody";
+import {NodeHeader} from "./header/NodeHeader";
+
 
 export type DragType = "none" | "ghost" | "material"
 export type NodeProps = {node : INodeInfo, dragType : DragType | undefined}
@@ -13,7 +16,7 @@ type TypeColorDict = {
     [key in NodeType]: string;
 };
 
-const Node = (props: NodeProps) => {
+export const Node = (props: NodeProps) => {
     const {node} = props
     const dragType = props.dragType ?? "none"
 
@@ -21,7 +24,7 @@ const Node = (props: NodeProps) => {
         "start" : "red",
         "default" : "yellow",
         "end" : "blue",
-        "twoButtons" : "purple"
+        "buttons" : "purple"
     }
     let styles : React.CSSProperties = {
         width: `${node.dimensions.x}px`,
@@ -38,16 +41,21 @@ const Node = (props: NodeProps) => {
 
     return (
             <WrapConditionally dragType={dragType} position={node.position}>
-                <div className={"node"} style={styles} draggable={dragType === "ghost"}>
-                    {node.id}
+                <div className="node" style={styles} draggable={dragType === "ghost"}>
                     <div className="row">
-                        <div className="col">
+                        <NodeHeader node={props.node}/>
+                    </div>
+                    <div className="row">
+                        <div className="col io-ports" >
                             {
                                node.inputs.map(input =>
                                     <Input key={input.id} {...input}/>)
                             }
                         </div>
-                        <div className="col">
+                        <div className="col-7">
+                            <NodeBody node={node}/>
+                        </div>
+                        <div className="col io-ports">
                             {
                                 node.outputs.map(output =>
                                     <Output key={output.id} {...output}/>)
@@ -81,4 +89,3 @@ const WrapperComponent = ({children, position} : { children : ReactNode, positio
 
 
 
-export default Node

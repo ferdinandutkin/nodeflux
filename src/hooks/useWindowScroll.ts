@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import {Position} from "../models/nodes/INode";
+import {Position} from "../models/nodes/typings/INode";
 const useWindowScroll = () => {
     const [windowScroll, setWindowScroll] = useState<Position>({x : 0, y : 0});
 

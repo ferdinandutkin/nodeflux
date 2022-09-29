@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import {Position} from "../models/nodes/INode";
+import {Position} from "../models/nodes/typings/INode";
 const useMousePosition = () => {
     const [mousePosition, setMousePosition] = useState<Position>();
 

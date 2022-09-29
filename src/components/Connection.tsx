@@ -4,7 +4,7 @@ import {xarrowPropsType} from "react-xarrows/lib/types";
 import {generateInputId, generateOutputId} from "../helpers/generateId";
 import {useAppDispatch} from "../state/store";
 import {disconnect} from "../state/reducers/connectionsReducer";
-import {IConnection} from "../models/nodes/IConnection";
+import {IConnection} from "../models/nodes/typings/IConnection";
 
 
 export const Connection = ({from, to, id} : IConnection) => {

@@ -1,4 +1,4 @@
-import { Identifier} from "../models/nodes/INode";
+import { Identifier} from "../models/nodes/typings/INode";
 import {createContext, useContext} from "react";
 
 

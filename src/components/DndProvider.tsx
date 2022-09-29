@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {INodeInfo, Position} from "../models/nodes/INode";
+import {INodeInfo, Position} from "../models/nodes/typings/INode";
 import {DndContext} from '../state/DndContext';
 
 

@@ -6,6 +6,7 @@ import {useAppDispatch} from "../state/store";
 import {add} from "../state/reducers/nodesReducer";
 import './Field.css'
 import {useDndContext} from "../state/DndContext";
+import {FieldContext} from "../state/FieldContext";
 const Field = () => {
 
 
@@ -54,14 +55,19 @@ const Field = () => {
     }
 
 
+
+
     return (
         <div className="field" ref={fieldRef} onDragEnter={onDragEnter} onDragOver={onDragOver} onDragLeave={onDragLeave} onDrop={onDrop}>
-            <div style={style}>
-                <Xwrapper>
-                    <Nodes/>
-                    <Connections/>
-                 </Xwrapper>
-            </div>
+            <FieldContext.Provider value={{isWithinField: true}}>
+                <div style={style}>
+                    <Xwrapper>
+                        <Nodes/>
+                        <Connections/>
+                    </Xwrapper>
+                </div>
+            </FieldContext.Provider>
+
         </div>);
 }
 

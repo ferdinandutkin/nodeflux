@@ -2,8 +2,8 @@ import {combineReducers, configureStore} from '@reduxjs/toolkit'
 import nodesReducer from "./reducers/nodesReducer";
 import connectionsReducer from "./reducers/connectionsReducer";
 import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
-import {INodeInfo} from "../models/nodes/INode";
-import {IConnection} from "../models/nodes/IConnection";
+import {INodeInfo} from "../models/nodes/typings/INode";
+import {IConnection} from "../models/nodes/typings/IConnection";
 
 
 
@@ -21,8 +21,6 @@ export type AppDispatch = typeof store.dispatch
 
 
 export const useAppDispatch = () => useDispatch<AppDispatch>()
-
-
 
 
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector

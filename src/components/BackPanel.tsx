@@ -1,9 +1,9 @@
 import './BackPanel.css'
-import {DefaultNodeFactory, EndNodeFactory, StartNodeFactory, TwoButtonsNodeFactory} from "../models/NodeFactories";
+import {DefaultNodeFactory, EndNodeFactory, StartNodeFactory, ButtonsNodeFactory} from "../models/NodeFactories";
 import {NodeFactory} from "./NodeFactory";
 
 export const BackPanel = () => {
-    const factories = [new StartNodeFactory(), new DefaultNodeFactory(), new TwoButtonsNodeFactory(), new EndNodeFactory()]
+    const factories = [new StartNodeFactory(), new DefaultNodeFactory(), new ButtonsNodeFactory(), new EndNodeFactory()]
 
     return (<div className="panel">
         {

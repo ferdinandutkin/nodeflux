@@ -1,8 +1,8 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit'
-import {Identifier} from "../../models/nodes/INode";
+import {Identifier} from "../../models/nodes/typings/INode";
 import {connections} from "../initial";
 import {Connection} from "../../models/Connection";
-import {IConnection} from "../../models/nodes/IConnection";
+import {IConnection} from "../../models/nodes/typings/IConnection";
 
 
 export interface IConnectionState {

@@ -7,7 +7,8 @@ import useMousePosition from "../hooks/useMousePosition";
 import {useAppDispatch} from "../state/store";
 import {connect} from "../state/reducers/connectionsReducer";
 import useWindowScroll from "../hooks/useWindowScroll";
-import {generateOutputId} from "../helpers/generateId";
+import {generateInputId, generateOutputId} from "../helpers/generateId";
+import {xarrowPropsType} from "react-xarrows/lib/types";
 
 export const PendingConnectionOverlay = () => {
     const {isActive, reset, from, to} = usePendingConnectionContext()!
@@ -39,6 +40,15 @@ export const PendingConnectionOverlay = () => {
         const Y = mousePosition.y - overlayDiv.current!.offsetTop + windowScroll.y
         const X = mousePosition.x - overlayDiv.current!.offsetLeft + windowScroll.x
 
+
+        const arrowProps : xarrowPropsType = {
+            startAnchor : "right",
+            endAnchor: "left",
+            start: generateOutputId(from!),
+            end: "arrowTarget",
+            dashness: {strokeLen : 3, nonStrokeLen : 1},
+        }
+
         const arrowTargetStyle : CSSProperties = {
             display : "hidden",
             position : "absolute",
@@ -48,7 +58,7 @@ export const PendingConnectionOverlay = () => {
 
         return (
             <div className="overlay" ref={overlayDiv}>
-                <Xarrow start={generateOutputId(from!)} dashness={{strokeLen : 3, nonStrokeLen : 1}} end="arrowTarget"/>
+                <Xarrow {...arrowProps}/>
                 <div id="arrowTarget"  style={arrowTargetStyle}/>
             </div>
             )

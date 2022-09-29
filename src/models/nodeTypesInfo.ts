@@ -6,9 +6,21 @@ export type CompatibilityDictionary = {
 }
 
 
+export const getMaxOutputsCount = (nodeType : NodeType) => {
+
+    const outputCountDictionary : {[key in NodeType] : number} = {
+        buttons : 3,
+        start : 1,
+        default : 1,
+        end : 0
+    }
+
+    return outputCountDictionary[nodeType]
+}
+
 export const canConnect = (from : NodeType, to : NodeType) => {
     const compatibilityDictionary : CompatibilityDictionary = {
-        twoButtons: ["default"],
+        buttons : ["default", "buttons"],
         start : ["end", "default"],
         default : ["end"],
         end : []

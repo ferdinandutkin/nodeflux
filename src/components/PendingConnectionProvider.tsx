@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {
     PendingConnectionContext,
 } from "../state/PendingConnectionContext";
-import {Identifier} from "../models/nodes/INode";
+import {Identifier} from "../models/nodes/typings/INode";
 
 
 export const PendingConnectionProvider = ({children}: {children : React.ReactNode}) => {

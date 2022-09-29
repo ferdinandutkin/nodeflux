@@ -1,4 +1,4 @@
-import {INodeInfo} from "./nodes/INode";
+import {INodeInfo} from "./nodes/typings/INode";
 
 export interface INodeFactory {
     createInstance(): INodeInfo

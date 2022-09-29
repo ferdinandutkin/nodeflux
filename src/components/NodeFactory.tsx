@@ -1,6 +1,6 @@
 
 import React, {MouseEventHandler} from "react";
-import Node from "./Node";
+import {Node} from "./Node";
 import {INodeFactory} from "../models/INodeFactory";
 import {useDndContext} from "../state/DndContext";
 

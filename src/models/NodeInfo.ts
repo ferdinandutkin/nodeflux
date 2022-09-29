@@ -1,5 +1,5 @@
-import {Identifier, INode, INodeInfo, Position, InputPort, IOPort} from "./nodes/INode";
-import {Vector} from "./nodes/Vector";
+import {Identifier, INode, INodeInfo, Position, InputPort, IOPort} from "./nodes/typings/INode";
+import {Vector} from "./nodes/typings/Vector";
 import {NodeType} from "./nodes/NodeType";
 
 
