@@ -15,8 +15,7 @@ export const DebouncedInput =
     const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
        setText(e.target.value)
     }
+    
 
-
-
-    return <input readOnly={readOnly} className={className} onChange={handleChange} value={value}/>
+    return <input readOnly={readOnly} className={className} onChange={handleChange} defaultValue={value}/>
 }

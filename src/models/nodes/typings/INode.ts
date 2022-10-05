@@ -13,14 +13,16 @@ export type InputPort = IOPort & {
 }
 export type OutputPort = IOPort;
 
-
+export type NodeData = {
+    title? : string
+}
 
 export interface INode {
     id : Identifier
     type : NodeType
     outputs : OutputPort[]
     inputs : InputPort[]
-    data? : any
+    data? : NodeData
 }
 
 

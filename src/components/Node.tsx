@@ -37,8 +37,6 @@ export const Node = (props: NodeProps) => {
         styles["transform"] = `translateX(${x}px) translateY(${y}px)`
     }
 
-
-
     return (
             <WrapConditionally dragType={dragType} position={node.position}>
                 <div className="node" style={styles} draggable={dragType === "ghost"}>

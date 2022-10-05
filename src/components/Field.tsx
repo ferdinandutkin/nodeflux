@@ -1,15 +1,13 @@
 import Nodes from "./Nodes";
 import Connections from "./Connections";
-import {Xwrapper} from "react-xarrows";
+import {useXarrow, Xwrapper} from "react-xarrows";
 import React, {CSSProperties, DragEventHandler} from "react";
 import {useAppDispatch} from "../state/store";
 import {add} from "../state/reducers/nodesReducer";
 import './Field.css'
 import {useDndContext} from "../state/DndContext";
 import {FieldContext} from "../state/FieldContext";
-const Field = () => {
-
-
+export const Field = () => {
     const {isDraggingOverDropZone, isOverDropZone, dragged, relativePosition, setIsOverDropZone, drop, dragLeave} = useDndContext()!
 
     const dispatch = useAppDispatch()
@@ -33,7 +31,7 @@ const Field = () => {
     }
 
     const onDragOver : DragEventHandler<HTMLDivElement> = (e) => {
-       e.preventDefault()
+        e.preventDefault()
     }
 
     const onDrop : DragEventHandler<HTMLDivElement> = (e) => {
@@ -58,20 +56,20 @@ const Field = () => {
 
 
     return (
+        
         <div className="field" ref={fieldRef} onDragEnter={onDragEnter} onDragOver={onDragOver} onDragLeave={onDragLeave} onDrop={onDrop}>
             <FieldContext.Provider value={{isWithinField: true}}>
+                <Xwrapper>
                 <div style={style}>
-                    <Xwrapper>
                         <Nodes/>
                         <Connections/>
-                    </Xwrapper>
                 </div>
+                </Xwrapper>
             </FieldContext.Provider>
-
-        </div>);
+        </div>
+        );
 }
 
-export default Field;
 
 
 

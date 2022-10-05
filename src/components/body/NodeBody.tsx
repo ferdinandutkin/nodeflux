@@ -7,7 +7,7 @@ export type NodeBodyProps = {node : INodeInfo}
 
 
 type NodeTypeBodyDictionary = {
-    [key in NodeType] : (props : NodeBodyProps) => JSX.Element
+    [key in NodeType]: (props: NodeBodyProps) => React.ReactNode
 }
 
 

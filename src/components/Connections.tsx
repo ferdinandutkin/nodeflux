@@ -4,7 +4,7 @@ import {Connection} from "./Connection";
 
 
 const Connections = () => {
-    const connections = useConnections(c => c);
+    const connections = useConnections(v => v);
 
     return (
         <>

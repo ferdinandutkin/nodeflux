@@ -28,10 +28,13 @@ export const connectionsSlice = createSlice({
         },
         disconnect: (state, {payload} : PayloadAction<Identifier> ) => {
             state.connections = state.connections.filter(connection => connection.id !== payload)
+        },
+        set: (state, {payload} : PayloadAction<IConnection[]> ) => {
+            state.connections = payload
         }
     },
 })
 
-export const { connect, disconnect } = connectionsSlice.actions
+export const { connect, disconnect, set } = connectionsSlice.actions
 
 export default connectionsSlice.reducer

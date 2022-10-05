@@ -3,13 +3,14 @@ import {NodeInfo} from "./NodeInfo";
 import {INodeInfo} from "./nodes/typings/INode";
 import {v4} from 'uuid';
 import {InputPort, OutputPort} from "./IOPort";
+import {StartNode} from "./nodes/StartNode";
 
 export class StartNodeFactory implements INodeFactory {
     constructor() {
         this.preview = this.createInstance()
     }
     createInstance(): NodeInfo {
-        return new NodeInfo({type : "start", id : v4(), inputs : [new InputPort()], outputs : [new OutputPort()]})
+        return new NodeInfo(new StartNode())
     }
     preview: INodeInfo;
 }

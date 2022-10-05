@@ -6,14 +6,15 @@ import {INodeInfo} from "../models/nodes/typings/INode";
 import {IConnection} from "../models/nodes/typings/IConnection";
 
 
-
 export const store = configureStore({
     reducer: combineReducers(
         {
             nodes : nodesReducer,
             connections : connectionsReducer
-        })
+        }),
 })
+
+
 
 
 export type RootState = ReturnType<typeof store.getState>

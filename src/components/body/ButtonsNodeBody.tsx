@@ -30,13 +30,13 @@ export const ButtonsNodeBody = (props : NodeBodyProps) => {
     return(
         <div>
             {props.node.outputs.map(output =>
-               <div className="row">
-                   <NodeOutputTextInput key={output.id} {...output}/>
+               <div className="row" key={output.id}>
+                   <NodeOutputTextInput  {...output}/>
                </div>)
             }
             {
                 (props.node.outputs.length < getMaxOutputsCount(props.node.type))?
-                <div className="row">
+                <div className="row" key="add-new" >
                     <button className="node-input" onClick={onClick}>+</button>
                 </div>
                     :
