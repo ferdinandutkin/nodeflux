@@ -26,10 +26,7 @@ export const NodeEditor = () =>
                         <div className="col">
                             <BackPanel/>
                         </div>
-
-
                         <div className="col">
-                            <button onClick={save}>HUI</button>
                             <PendingConnectionProvider>
                                 <PendingConnectionOverlay/>
                                 <Field/>
