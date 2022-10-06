@@ -23,14 +23,14 @@ export const PendingConnectionOverlay = () => {
         if (leftClickState === "pressed" && isActive) {
             reset()
         }
-    }, [leftClickState, isActive, reset])
+    }, [leftClickState, isActive])
 
     useEffect(() => {
         if (from && to) {
             dispatcher(connect({from, to}))
             reset()
         }
-    }, [from, to, dispatcher, reset])
+    }, [from, to])
 
 
 
