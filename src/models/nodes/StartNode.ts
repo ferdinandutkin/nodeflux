@@ -1,6 +1,6 @@
 import {Node} from './Node'
-import {IStartNode} from "./typings/IStartNode";
 import {OutputPort} from "../IOPort";
+import {IStartNode} from "../typings/IStartNode";
 
 export class StartNode extends Node implements IStartNode {
 

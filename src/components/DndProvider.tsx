@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import {INodeInfo, Position} from "../models/nodes/typings/INode";
 import {DndContext} from '../state/DndContext';
+import {INodeInfo, Position} from "../models/typings/INode";
 
 
 export const DndProvider = ({children}: {children : React.ReactNode}) => {
@@ -14,7 +14,9 @@ export const DndProvider = ({children}: {children : React.ReactNode}) => {
     }
 
     const drop = () => {
+        console.log("drop?")
         if (isOverDropZone) {
+            console.log("drop!")
             setDragged(undefined)
             setRelativePosition(undefined)
         }

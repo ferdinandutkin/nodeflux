@@ -4,7 +4,7 @@ import {usePendingConnectionContext} from "../state/PendingConnectionContext";
 import {useNodes} from "../state/store";
 import {canConnect} from "../models/nodeTypesInfo";
 import {generateInputId} from "../helpers/generateId";
-import {InputPort} from "../models/nodes/typings/INode";
+import {InputPort} from "../models/typings/INode";
 type InputState = "default" | "rejected"
 
 export const Input = ({ id, label} : InputPort) => {

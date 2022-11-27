@@ -1,5 +1,6 @@
-import { Identifier} from "../models/nodes/typings/INode";
+
 import {createContext, useContext} from "react";
+import {Identifier} from "../models/typings/INode";
 
 
 export type PendingConnectionContextState = {

@@ -1,4 +1,4 @@
-import {Identifier} from "../models/nodes/typings/INode";
+import {Identifier} from "../models/typings/INode";
 
 export const generateOutputId = (id : Identifier) =>
     `output-${id}`

@@ -1,6 +1,6 @@
-import {Identifier, INode, INodeInfo, Position, InputPort, IOPort} from "./nodes/typings/INode";
-import {Vector} from "./nodes/typings/Vector";
 import {NodeType} from "./nodes/NodeType";
+import {Identifier, INode, INodeInfo, InputPort, IOPort, NodeData, Position} from "./typings/INode";
+import {Vector} from "./typings/Vector";
 
 
 export class NodeInfo implements INodeInfo {
@@ -10,6 +10,7 @@ export class NodeInfo implements INodeInfo {
     type: NodeType;
     outputs: IOPort[];
     inputs: InputPort[];
+    data?: NodeData;
 
     constructor(node: INode) {
         this.dimensions = {x: 200, y: 200}
@@ -18,5 +19,6 @@ export class NodeInfo implements INodeInfo {
         this.type = node.type
         this.outputs = node.outputs;
         this.inputs = node.inputs
+        this.data = node.data
     }
 }

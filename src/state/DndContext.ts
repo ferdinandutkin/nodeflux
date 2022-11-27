@@ -1,5 +1,5 @@
-import {INodeInfo, Position} from "../models/nodes/typings/INode";
 import {createContext, useContext} from "react";
+import {INodeInfo, Position} from "../models/typings/INode";
 
 export type DndContextState = {
     drag : ({dragged, relativePosition} : {dragged : INodeInfo, relativePosition : Position}) => void

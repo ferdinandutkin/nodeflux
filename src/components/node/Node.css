@@ -1,0 +1,20 @@
+.node {
+    border-width: 2px;
+    border-color: black;
+    border-style: solid;
+    position: absolute;
+    border-radius: 5px;
+}
+
+.node.collapsed {
+    width: 100px;
+    height: 100px;
+}
+
+.node.collapsed .io-port  {
+    margin-top: 0;
+}
+
+.io-port + .io-port  {
+    margin-top: 45px;
+}

@@ -1,0 +1,11 @@
+.connection {
+    filter: drop-shadow(0 0 2px rgba(132, 126, 126, 0.8));
+}
+
+
+
+.head {
+    stroke-width: 0.01;
+    stroke: rgba(132, 126, 126, 0.8)
+
+}

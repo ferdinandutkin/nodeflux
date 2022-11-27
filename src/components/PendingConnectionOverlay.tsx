@@ -46,6 +46,7 @@ export const PendingConnectionOverlay = () => {
             endAnchor: "left",
             start: generateOutputId(from!),
             end: "arrowTarget",
+            color: "black",
             dashness: {strokeLen : 3, nonStrokeLen : 1},
         }
 

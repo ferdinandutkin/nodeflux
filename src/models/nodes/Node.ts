@@ -1,6 +1,6 @@
-import {Identifier, INode, OutputPort, InputPort, NodeData} from "./typings/INode";
 import {v4} from "uuid";
 import {NodeType} from "./NodeType";
+import {Identifier, INode, InputPort, NodeData, OutputPort} from "../typings/INode";
 
 export class Node implements INode {
     id: Identifier;

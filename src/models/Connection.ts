@@ -1,6 +1,7 @@
 import {v4} from "uuid";
-import {Identifier} from "./nodes/typings/INode";
-import {IConnection} from "./nodes/typings/IConnection";
+import {Identifier} from "./typings/INode";
+import {IConnection} from "./typings/IConnection";
+
 
 export class Connection implements IConnection {
     constructor(from : Identifier, to : Identifier) {

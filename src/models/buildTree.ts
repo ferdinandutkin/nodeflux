@@ -1,8 +1,7 @@
 import * as _ from "lodash";
-import {IConnection} from "./nodes/typings/IConnection";
-import {Identifier, INodeInfo} from "./nodes/typings/INode";
-import {Vector} from "./nodes/typings/Vector";
-
+import {Identifier, INodeInfo} from "./typings/INode";
+import {IConnection} from "./typings/IConnection";
+import {Vector} from "./typings/Vector";
 
 export function buildTree(nodes : INodeInfo[], connections : IConnection[], rootId : Identifier) {
 

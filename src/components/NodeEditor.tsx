@@ -3,37 +3,44 @@ import {BackPanel} from "./BackPanel";
 import {DndProvider} from "./DndProvider";
 import {PendingConnectionProvider} from "./PendingConnectionProvider";
 import {PendingConnectionOverlay} from "./PendingConnectionOverlay";
-import React from "react";
-import {useAppSelector} from "../state/store";
-import {postConnections, postNodes} from "../api/requests";
+import React, {useEffect} from "react";
+import {useAppDispatch} from "../state/store";
+import {useParams} from "react-router-dom";
+import {retrieveConfig} from "../state/reducers/nodesReducer";
+import Grid from "@mui/material/Unstable_Grid2";
 
 
 export const NodeEditor = () =>
     {
-        const {nodes : {nodes}, connections : {connections}} = useAppSelector(state => state)
-        
-        const save = () => {
-            console.log('save')
-            postNodes(nodes).then(v => 
-                postConnections(connections)).then(f => console.log(f))
-            
+        const {botId} = useParams();
+
+        const dispatch = useAppDispatch()
+
+        useEffect(() => {
+            if (botId) {
+                dispatch(retrieveConfig(botId))
+            }
+        }, [])
+
+
+        if (!botId) {
+            return <div>No botId provided</div>
         }
 
         return (
-
                 <DndProvider>
-                    <div className="row no-gutters">
-                        <div className="col">
+
+                    <Grid container spacing={0}>
+                        <Grid xs={0} sm={2} display={{xs : 'none', md : 'flex'}}>
                             <BackPanel/>
-                        </div>
-                        <div className="col">
+                        </Grid>
+                        <Grid xs={12} sm={10}>
                             <PendingConnectionProvider>
                                 <PendingConnectionOverlay/>
                                 <Field/>
                             </PendingConnectionProvider>
-                        </div>
-                    </div>
+                        </Grid>
+                    </Grid>
                 </DndProvider>
-
            )
     }
