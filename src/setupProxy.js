@@ -15,6 +15,7 @@ module.exports = function(app) {
             apiFilter,
             {
                     target: process.env.REACT_APP_API,
+                    secure: false,
                     changeOrigin: true,
             })
     );

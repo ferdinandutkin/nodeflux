@@ -16,9 +16,9 @@ export const LogTerminal = () => {
 
     return (
         <div style={style} >
-            {logs.map(log =>
+            {logs.map((log, idx) =>
 
-                <div>{log}</div>
+                <div key={idx}>{log}</div>
 
             )}
         </div>
