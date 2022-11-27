@@ -5,7 +5,6 @@ import {setBotState, startBot, stopBot} from "../../state/reducers/botsReducer";
 import {Middleware} from "redux";
 import {login} from "../../state/reducers/userReducer";
 import {pushLog, startReceivingLogs, stopReceivingLogs} from "../../state/reducers/logsReduces";
-import {IStreamResult} from "@microsoft/signalr/dist/esm/Stream";
 
 
 export const SignalRMiddleware : Middleware  = (store) => {
@@ -34,10 +33,16 @@ export const SignalRMiddleware : Middleware  = (store) => {
     }
 
     const reconnect = async (token : string) => {
-        if (connection) {
-            await connection.stop()
+        try {
+            if (connection) {
+                await connection.stop()
+            }
+            connection = await createConnection(token)
         }
-        connection = await createConnection(token)
+        catch (e) {
+            console.log('reconnect', e)
+        }
+
     }
 
     const reconnectIfDisconnected = async () => {

@@ -12,7 +12,6 @@ import {useAppDispatch, useAppSelector} from "../state/store";
 import {login} from "../state/reducers/userReducer";
 import Grid from "@mui/material/Unstable_Grid2";
 import {Link} from "react-router-dom";
-import {LoginWidget} from "./LoginWidget";
 
 
 const loginSchema = object({
@@ -103,7 +102,6 @@ export const Login = () => {
                     </Typography>
                 </Stack>
             </Grid>
-            <LoginWidget/>
     </Centered>
     );
 };

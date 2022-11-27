@@ -6,7 +6,7 @@ import {Role} from "../models/Role";
 import {Bot} from "../models/typings/Bot";
 import {User} from "../models/User";
 
-export const client = axios.create({baseURL: 'https://localhost:7109/api/'})
+export const client = axios.create({baseURL: `${window.location.origin}/api/`})
 
 
 

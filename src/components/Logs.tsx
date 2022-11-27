@@ -32,14 +32,17 @@ export const Logs = () => {
 
 
     return (
-        <Grid container sx={{minHeight:  '100%'}} alignItems="stretch">
-            <Grid xs={2}>
-                <BotInstanceControls id={botId}/>
+        <Box display="flex" flexDirection="column">
+            <Grid container sx={{minHeight:  '100%',  flexGrow: 1}} alignItems="stretch">
+                <Grid xs={2}>
+                    <BotInstanceControls id={botId}/>
 
+                </Grid>
+                <Grid xs={10} >
+                    <LogTerminal/>
+                </Grid>
             </Grid>
-            <Grid xs={10} >
-                <LogTerminal/>
-            </Grid>
-        </Grid>
+        </Box>
+
     )
 }
