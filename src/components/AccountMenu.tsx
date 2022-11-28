@@ -1,13 +1,14 @@
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Avatar from "@mui/material/Avatar";
-import {ListItemIcon} from "@mui/material";
+import {IconButton, ListItemIcon} from "@mui/material";
 import {Logout} from "@mui/icons-material";
 import * as React from "react";
 import Tooltip from "@mui/material/Tooltip";
 import Button from "@mui/material/Button";
 import {useAppDispatch, useIsAuthenticated, useLogin} from "../state/store";
 import {logout} from "../state/reducers/userReducer";
+import {MeModal} from "../MeModal";
 
 export const AccountMenu = () => {
 
@@ -16,11 +17,13 @@ export const AccountMenu = () => {
     const isAuthenticated = useIsAuthenticated()
 
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+
+    const [showMeModal, setShowMeModal] = React.useState(false)
     const open = Boolean(anchorEl);
-    const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    const handleMenuClick = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget);
     };
-    const handleClose = () => {
+    const handleMenuClose = () => {
         setAnchorEl(null);
     };
 
@@ -28,15 +31,20 @@ export const AccountMenu = () => {
         dispatch(logout())
     }
 
+    const openMeModal = () => {
+        setShowMeModal(true)
+    }
+
     if (!isAuthenticated) {
         return null
     }
 
     return (<>
+            <MeModal open={showMeModal} onClose={() => setShowMeModal(false)}/>
             <Tooltip title="Account settings">
 
                 <Button
-                    onClick={handleClick}
+                    onClick={handleMenuClick}
                     size="small"
                     sx={{ ml: 2 }}
                     aria-controls={open ? 'account-menu' : undefined}
@@ -52,8 +60,8 @@ export const AccountMenu = () => {
                 anchorEl={anchorEl}
                 id="account-menu"
                 open={open}
-                onClose={handleClose}
-                onClick={handleClose}
+                onClose={handleMenuClose}
+                onClick={handleMenuClose}
                 PaperProps={{
                     elevation: 0,
                     sx: {
@@ -83,7 +91,7 @@ export const AccountMenu = () => {
                 transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                 anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
             >
-                <MenuItem>
+                <MenuItem onClick={openMeModal}>
                     <Avatar /> {login}
                 </MenuItem>
                 <MenuItem onClick={handleLogout}>

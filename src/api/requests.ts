@@ -79,6 +79,10 @@ export const postLogin = (credentials : Credentials) => {
     return client.post<AuthenticationResult>('User/login', credentials)
 }
 
+export const putPassword = (credentials : Omit<Credentials, "login"> & {newPassword : string}) => {
+    return client.put<AuthenticationResult>('User/password', credentials)
+}
+
 
 export const postRegister = (credentials : Credentials) => {
     return client.post<AuthenticationResult>('User/register', credentials)

@@ -1,6 +1,6 @@
 import {useParams} from "react-router-dom";
 import React, {useEffect} from "react";
-import {useAppDispatch, useAppSelector} from "../state/store";
+import {useAppDispatch} from "../state/store";
 import {startReceivingLogs, stopReceivingLogs} from "../state/reducers/logsReduces";
 import Grid from "@mui/material/Unstable_Grid2";
 import {Box, Drawer} from "@mui/material";
@@ -8,7 +8,6 @@ import {BotInstanceControls} from "./bot/BotInstanceControls";
 import {LogTerminal} from "./LogTerminal";
 import {appBarHeight} from "./Layout";
 import {BotInfo} from "./bot/BotInfo";
-import {BotAvatar} from "./bot/BotAvatar";
 
 
 export const Logs = () => {

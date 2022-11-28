@@ -67,9 +67,6 @@ export const Bot = ({bot, style} : {bot : IBot, style : CSSProperties}) => {
                 <MenuItem component={Link} to={`/logs/${bot.id}`}>Logs</MenuItem>
             </Menu>
             <Typography gutterBottom variant="body2" component="h2" noWrap>
-                {bot.id}
-            </Typography>
-            <Typography gutterBottom variant="body2" component="h2" noWrap>
                 {bot.state}
             </Typography>
         </CardContent>

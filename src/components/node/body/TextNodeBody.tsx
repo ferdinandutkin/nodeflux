@@ -17,6 +17,6 @@ export const TextNodeBody = ({node} : NodeBodyProps) => {
 
     const data = node.data as TextNodeData;
 
-    return <DebouncedInput readOnly={!isWithinField} value={data.text} variant="area" onChange={onChanged} delay={500} rows={5} cols={20} />
+    return <DebouncedInput readOnly={!isWithinField} value={data.text} variant="area" onChange={onChanged} delay={500} rows={5} />
 
 }

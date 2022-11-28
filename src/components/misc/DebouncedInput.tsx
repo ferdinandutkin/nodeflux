@@ -22,8 +22,6 @@ export type InputVariantDebouncedInputProps = BaseDebouncedInputProps & {
 export type TextAreaVariantDebouncedInputProps = BaseDebouncedInputProps & {
     variant : "area"
     rows : number,
-    cols : number
-
 }
 
 
@@ -51,6 +49,6 @@ export const DebouncedInput = (props : InputVariantDebouncedInputProps | TextAre
         return <Input style={style} readOnly={readOnly} className={className} onChange={handleChange} value={text} endAdornment={adornment}/>
     }
 
-    return <textarea style={style} readOnly={readOnly} className={className} cols={props.cols} rows={props.rows}  onChange={handleChange}  value={text}/>
+    return <Input multiline={true} style={style} readOnly={readOnly} className={className} rows={props.rows}  onChange={handleChange}  value={text}/>
 
 }

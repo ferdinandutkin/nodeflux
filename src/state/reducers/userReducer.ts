@@ -1,5 +1,5 @@
 import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit'
-import {Credentials, postLogin, postRegister} from "../../api/requests";
+import {Credentials, postLogin, postRegister, putPassword} from "../../api/requests";
 import {Role} from "../../models/Role";
 
 export interface IUserState {
@@ -17,6 +17,14 @@ export const login = createAsyncThunk<IUserState, Credentials>
 ('user/login', async (credentials : Credentials, thunkApi) => {
 
     const result = await postLogin(credentials)
+
+    return result.data
+})
+
+export const changePassword = createAsyncThunk<IUserState, Omit<Credentials, "login"> & {newPassword : string}>
+('user/changePassword', async (credentials : Omit<Credentials, "login"> & {newPassword : string}, api) => {
+
+    const result = await putPassword(credentials)
 
     return result.data
 })
@@ -58,6 +66,18 @@ export const userSlice = createSlice({
                 state.registerErrors = undefined
             }
         }).addCase(register.fulfilled, (state, {payload}) => {
+            state.login = payload.login
+            state.roles = payload.roles
+            state.token = payload.token
+
+            if (!payload.token) {
+                state.registerErrors = ["Invalid credentials provided"]
+            }
+            else {
+                state.loginErrors = undefined
+                state.registerErrors = undefined
+            }
+        }).addCase(changePassword.fulfilled, (state, {payload}) => {
             state.login = payload.login
             state.roles = payload.roles
             state.token = payload.token
