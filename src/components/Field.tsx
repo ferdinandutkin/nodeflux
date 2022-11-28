@@ -1,16 +1,19 @@
 import Nodes from "./Nodes";
 import Connections from "./Connections";
-import {useXarrow, Xwrapper} from "react-xarrows";
+import {Xwrapper} from "react-xarrows";
 import React, {CSSProperties, DragEventHandler} from "react";
 import {useAppDispatch} from "../state/store";
 import {add} from "../state/reducers/nodesReducer";
 import './Field.css'
+import useWindowScroll from "../hooks/useWindowScroll";
 import {useDndContext} from "../state/DndContext";
 import {FieldContext} from "../state/FieldContext";
 export const Field = () => {
     const {isDraggingOverDropZone, isOverDropZone, dragged, relativePosition, setIsOverDropZone, drop, dragLeave} = useDndContext()!
 
     const dispatch = useAppDispatch()
+    
+    const scroll = useWindowScroll()
 
     const fieldRef = React.useRef<HTMLDivElement>(null);
 
@@ -35,12 +38,11 @@ export const Field = () => {
     }
 
     const onDrop : DragEventHandler<HTMLDivElement> = (e) => {
-        console.log("onDrop", e)
         if (isDraggingOverDropZone) {
-
             const position = {
-                x: e.clientX - fieldRef.current!.offsetLeft - (relativePosition?.x ?? 0),
-                y: e.clientY - fieldRef.current!.offsetTop - (relativePosition?.y ?? 0)}
+                x: e.clientX - fieldRef.current!.offsetLeft - (relativePosition?.x ?? 0) + scroll.x,
+                y: e.clientY - fieldRef.current!.offsetTop - (relativePosition?.y ?? 0) + scroll.y
+            }
             dispatch(add({...dragged!, position}))
             drop()
         }
@@ -56,7 +58,7 @@ export const Field = () => {
 
 
     return (
-        
+
         <div className="field" ref={fieldRef} onDragEnter={onDragEnter} onDragOver={onDragOver} onDragLeave={onDragLeave} onDrop={onDrop}>
             <FieldContext.Provider value={{isWithinField: true}}>
                 <Xwrapper>

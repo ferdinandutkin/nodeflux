@@ -7,11 +7,8 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import {AccountMenu} from "./AccountMenu";
-import {CssBaseline} from "@mui/material";
 
-
-
-
+export const appBarHeight = '64px'
 
 export const Layout = () => {
 
@@ -27,8 +24,7 @@ export const Layout = () => {
 
     return (
         <>
-            <CssBaseline/>
-                <AppBar position="static" sx={{ zIndex: 4}}>
+                <AppBar position="fixed" sx={{ zIndex: 4, height: appBarHeight}}>
                     <Container maxWidth="xl">
                         <Toolbar disableGutters>
                             <Box sx={{ flexGrow: 1, display: 'flex'  }}>
@@ -47,9 +43,9 @@ export const Layout = () => {
 
                     </Container>
                 </AppBar>
-            <Outlet/>
-
-
+            <Box sx={{height : '100%', width : '100%', mt: appBarHeight}}>
+                <Outlet/>
+            </Box>
         </>
 
     );

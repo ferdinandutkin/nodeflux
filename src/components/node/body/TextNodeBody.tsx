@@ -4,7 +4,6 @@ import {changeText} from "../../../state/reducers/nodesReducer";
 import {DebouncedInput} from "../../misc/DebouncedInput";
 import React from "react";
 import {useFieldContext} from "../../../state/FieldContext";
-import {ITextNode} from "../../../models/typings/ITextNode";
 import {TextNodeData} from "../../../models/typings/TextNodeData";
 
 export const TextNodeBody = ({node} : NodeBodyProps) => {

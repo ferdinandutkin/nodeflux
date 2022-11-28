@@ -7,7 +7,7 @@ import useMousePosition from "../hooks/useMousePosition";
 import {useAppDispatch} from "../state/store";
 import {connect} from "../state/reducers/connectionsReducer";
 import useWindowScroll from "../hooks/useWindowScroll";
-import {generateInputId, generateOutputId} from "../helpers/generateId";
+import {generateOutputId} from "../helpers/generateId";
 import {xarrowPropsType} from "react-xarrows/lib/types";
 
 export const PendingConnectionOverlay = () => {

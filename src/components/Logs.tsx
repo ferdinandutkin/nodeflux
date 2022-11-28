@@ -3,11 +3,12 @@ import React, {useEffect} from "react";
 import {useAppDispatch, useAppSelector} from "../state/store";
 import {startReceivingLogs, stopReceivingLogs} from "../state/reducers/logsReduces";
 import Grid from "@mui/material/Unstable_Grid2";
-import {Box, Paper} from "@mui/material";
+import {Box, Drawer} from "@mui/material";
 import {BotInstanceControls} from "./bot/BotInstanceControls";
 import {LogTerminal} from "./LogTerminal";
-import {AddBot} from "./forms/addBot/AddBot";
-import {Bot} from "./bot/Bot";
+import {appBarHeight} from "./Layout";
+import {BotInfo} from "./bot/BotInfo";
+import {BotAvatar} from "./bot/BotAvatar";
 
 
 export const Logs = () => {
@@ -29,14 +30,29 @@ export const Logs = () => {
     if (!botId) {
         return null
     }
+    const drawerWidth = 240
 
 
     return (
         <Box display="flex" flexDirection="column">
             <Grid container sx={{minHeight:  '100%',  flexGrow: 1}} alignItems="stretch">
                 <Grid xs={2}>
-                    <BotInstanceControls id={botId}/>
-
+                    <Drawer
+                        variant="permanent"
+                        sx={{
+                            width: drawerWidth,
+                            flexShrink: 0,
+                            padding : 2,
+                            [`& .MuiDrawer-paper`]: { width: drawerWidth, boxSizing: 'border-box', zIndex: 2,  mt: appBarHeight }
+                        }}
+                    >
+                        <BotInfo id={botId}/>
+                        <Grid xs={12}>
+                            <Box sx={{ display: 'flex', alignItems: 'center', mt: 2, justifyContent: 'center'}}>
+                                <BotInstanceControls id={botId}/>
+                            </Box>
+                        </Grid>
+                    </Drawer>
                 </Grid>
                 <Grid xs={10} >
                     <LogTerminal/>

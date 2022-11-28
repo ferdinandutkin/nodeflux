@@ -5,26 +5,24 @@ import {
     ButtonsNodeFactory,
     TextNodeFactory, KeyboardNodeFactory, CommandsNodeFactory
 } from "../models/NodeFactories";
-import {NodeFactoryExpanded} from "./NodeFactoryExpanded";
+import {NodeFactory} from "./NodeFactory";
 import {
     Box,
     Button, Drawer,
     FormControl,
     InputLabel,
     MenuItem,
-    Paper,
     Select,
     SelectChangeEvent, Tooltip
 } from "@mui/material";
 import SaveIcon from "@mui/icons-material/Save";
 import React, {useState} from "react";
-import {useAppDispatch, useBot} from "../state/store";
+import {useAppDispatch} from "../state/store";
 import {saveConfig} from "../state/reducers/nodesReducer";
 import {useParams} from "react-router-dom";
-import {NodeFactoryCollapsed} from "./NodeFactoryCollapsed";
-import {BotAvatar} from "./bot/BotAvatar";
-import {BotSubheader} from "./bot/BotSubheader";
 import Grid from "@mui/material/Unstable_Grid2";
+import {appBarHeight} from "./Layout";
+import {BotInfo} from "./bot/BotInfo";
 
 
 export const BackPanel = () => {
@@ -38,39 +36,30 @@ export const BackPanel = () => {
 
     const {botId} = useParams();
 
-    const bot = useBot(botId!)
-
     const dispatch = useAppDispatch()
 
-    const drawerWidth = 240;
+    const drawerWidth = 240
 
     const onClick = () => {
         dispatch(saveConfig(botId!))
     }
 
-
-
     const [viewType, setViewType] = useState<ViewType>("expanded")
 
     return (
-        <Paper  className="panel"  elevation={2} sx={{padding : 2}} >
+        <Drawer
+            variant="permanent"
+            className="panel"
+            sx={{
+                width: drawerWidth,
+                flexShrink: 0,
+                padding : 2,
+                [`& .MuiDrawer-paper`]: { width: drawerWidth, boxSizing: 'border-box', zIndex: 2,  mt: appBarHeight }
+            }}
+        >
 
         <Grid>
-            <Grid xs={12}>
-                <Box sx={{ display: 'flex', alignItems: 'center', mt: 2, justifyContent: 'center'}}>
-                    <BotAvatar avatar={bot.avatar}/>
-                </Box>
-            </Grid>
-            <Grid xs={12}>
-                <Box sx={{ display: 'flex', alignItems: 'center',  justifyContent: 'center', marginY: 1 }}>
-                    {bot.name}
-                </Box>
-            </Grid>
-            <Grid xs={12}>
-                <Box sx={{ display: 'flex', alignItems: 'center',  justifyContent: 'center', marginY: 1 }}>
-                    <BotSubheader username={bot.username}/>
-                </Box>
-            </Grid>
+            <BotInfo id={botId!}/>
             <Grid xs={12}>
                 <Box sx={{ display: 'flex', alignItems: 'right',  marginX: 1 }}>
                     <Button variant="outlined" onClick={onClick} sx={{minWidth: '100%'}} startIcon={<SaveIcon/>}>
@@ -82,7 +71,6 @@ export const BackPanel = () => {
         <Box sx={{ display: 'flex', alignItems: 'center',  justifyContent: 'center', marginY: 2, marginX: 1  }}>
             <ViewTypeSelect value={viewType} onChange={setViewType}/>
         </Box>
-
         {
             factories.map(factory =>
                 <Box
@@ -94,16 +82,14 @@ export const BackPanel = () => {
                 >
                         <Tooltip title={factory.preview.type} followCursor>
                             <div>
-                                {(viewType == "expanded")?
-                                    <NodeFactoryExpanded factory={factory} /> :
-                                    <NodeFactoryCollapsed factory={factory}/>}
+                                <NodeFactory factory={factory} type={viewType} />
                             </div>
                         </Tooltip>
                 </Box>
 
             )
         }
-        </Paper>)
+        </Drawer>)
 }
 
 
